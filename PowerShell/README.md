@@ -1,20 +1,16 @@
-# Dependencies
+# FLY Migration PowerShell
 
-Windows, PowerShell 5.1+
+## Dependencies
+PowerShell 5.1+
 
-PSSwaggerUtility 
+## Import PowerShell Modules
+Go to the folder you installed FLY Manager, open folder "PowerShell".
+Run Import-FLYMigration.ps1 with Administrator rights.
 
-reference 'https://www.powershellgallery.com/packages/PSSwaggerUtility' to get more details
+## Update Certificate Policy for PowerShell
+Run the scripts below, to update the certificae policy.
 
-# How to import PSModule
-
-Import-Module '<your-service-root-folder>/FLYMigration
-
-###########################################################################################
-#                                                                                         #
-# if the certificate binding to your serivce is invalid, below code is required.          #
-#                                                                                         #
-###########################################################################################
+```powershell
 Add-Type @"
     using System.Net;
     using System.Security.Cryptography.X509Certificates;
@@ -25,4 +21,4 @@ Add-Type @"
     }
 "@
 [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
-###########################################################################################
+```
