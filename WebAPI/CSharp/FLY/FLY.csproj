@@ -57,9 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AMP\AbstractApplication.cs">
-      <Link>AbstractApplication.cs</Link>
-    </Compile>
+    <Compile Include="AbstractApplication.cs" />
     <Compile Include="FS\FindFSJobByPlan.cs" />
     <Compile Include="FS\GetFSJob.cs" />
     <Compile Include="FS\GetFSMigrationPolicy.cs" />
