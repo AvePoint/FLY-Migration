@@ -2,4 +2,5 @@
 
 FLY provides Web APIs for developers to build their own migration solutions.
 
-You can find the API key and document in FLY interface Management -> General Settings -> API Keys.
+You can get the API key and API documentation in FLY interface > Management > General Settings > API Keys. 
+
