@@ -1,0 +1,9 @@
+D:\GitHub\FLY-Migration\WebAPI\CSharp\Modules\bin\Debug\AvePointMigrationApiModules.dll.config
+D:\GitHub\FLY-Migration\WebAPI\CSharp\Modules\bin\Debug\AvePointMigrationApiModules.dll
+D:\GitHub\FLY-Migration\WebAPI\CSharp\Modules\bin\Debug\AvePointMigrationApiModules.pdb
+D:\GitHub\FLY-Migration\WebAPI\CSharp\Modules\bin\Debug\Microsoft.Rest.ClientRuntime.dll
+D:\GitHub\FLY-Migration\WebAPI\CSharp\Modules\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub\FLY-Migration\WebAPI\CSharp\Modules\bin\Debug\Newtonsoft.Json.xml
+D:\GitHub\FLY-Migration\WebAPI\CSharp\Modules\obj\Debug\Modules.csprojResolveAssemblyReference.cache
+D:\GitHub\FLY-Migration\WebAPI\CSharp\Modules\obj\Debug\AvePointMigrationApiModules.dll
+D:\GitHub\FLY-Migration\WebAPI\CSharp\Modules\obj\Debug\AvePointMigrationApiModules.pdb
