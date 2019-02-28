@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FLY", "FLY\FLY.csproj", "{6FAEACE0-3EAB-4577-A6F6-6031C7743B13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules", "Modules\Modules.csproj", "{5F5DD1CE-65CE-4251-8976-C4333980CF79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FAEACE0-3EAB-4577-A6F6-6031C7743B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FAEACE0-3EAB-4577-A6F6-6031C7743B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FAEACE0-3EAB-4577-A6F6-6031C7743B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FAEACE0-3EAB-4577-A6F6-6031C7743B13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F5DD1CE-65CE-4251-8976-C4333980CF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F5DD1CE-65CE-4251-8976-C4333980CF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F5DD1CE-65CE-4251-8976-C4333980CF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F5DD1CE-65CE-4251-8976-C4333980CF79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B367769B-482F-4460-80FB-44AC45DC2D60}
+	EndGlobalSection
+EndGlobal
