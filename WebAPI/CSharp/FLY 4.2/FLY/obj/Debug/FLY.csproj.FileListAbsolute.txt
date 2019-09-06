@@ -1,0 +1,2 @@
+D:\GitHub\FLY-Migration\WebAPI\CSharp\FLY 4.2\FLY\obj\Debug\FLY.csprojAssemblyReference.cache
+D:\GitHub\FLY-Migration\WebAPI\CSharp\FLY 4.2\FLY\obj\Debug\FLY.csproj.CoreCompileInputs.cache
