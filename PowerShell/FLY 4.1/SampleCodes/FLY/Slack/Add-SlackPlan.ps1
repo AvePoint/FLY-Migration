@@ -48,7 +48,7 @@ $Schedule = New-ScheduleObject -IntervalType OnlyOnce -StartTime ([Datetime]::No
 
 $PlanSettings = New-SlackPlanSettingsObject -NameLabel $PlanNameLabel -PolicyId '<migration policy id>' -DatabaseId '<migration database id>' -Schedule $Schedule
 
-$Plan = New-SlackPlanObject -Settings $Settings -Mappings $Mappings
+$Plan = New-SlackPlanObject -Settings $PlanSettings -Mappings $Mappings
 
 $Response = Add-SlackPlan -Plan $Plan -BaseUri $BaseUri -APIKey $ApiKey
 
