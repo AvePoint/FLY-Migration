@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6FAEACE0-3EAB-4577-A6F6-6031C7743B13}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>AvePoint.Migration.Samples</RootNamespace>
+    <AssemblyName>FLYSamples</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>AvePoint.Migration.Samples.DeleteBoxPlan</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.2.3.6\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractApplication.cs" />
+    <Compile Include="Box\AddBoxPlan.cs" />
+    <Compile Include="Box\DeleteBoxPlan.cs" />
+    <Compile Include="Box\StopBoxJob.cs" />
+    <Compile Include="Box\DeleteBoxJob.cs" />
+    <Compile Include="Box\FindBoxJobByPlan.cs" />
+    <Compile Include="Box\GetBoxConnection.cs" />
+    <Compile Include="Box\GetBoxJob.cs" />
+    <Compile Include="Box\GetBoxPlan.cs" />
+    <Compile Include="Box\GetBoxMigrationPolicy.cs" />
+    <Compile Include="Box\RerunBoxJob.cs" />
+    <Compile Include="Box\RunBoxJobByPlan.cs" />
+    <Compile Include="Common\GetAccount.cs" />
+    <Compile Include="Common\GetAppProfiles.cs" />
+    <Compile Include="Common\GetMigrationDatabase.cs" />
+    <Compile Include="Dropbox\AddDropboxPlan.cs" />
+    <Compile Include="Dropbox\DeleteDropboxPlan.cs" />
+    <Compile Include="Dropbox\DeleteDropboxJob.cs" />
+    <Compile Include="Dropbox\FindDropboxJobByPlan.cs" />
+    <Compile Include="Dropbox\GetDropboxPlan.cs" />
+    <Compile Include="Dropbox\GetDropboxMigrationPolicy.cs" />
+    <Compile Include="Dropbox\GetDropboxConnection.cs" />
+    <Compile Include="Dropbox\GetDropboxJob.cs" />
+    <Compile Include="Dropbox\RerunDropboxJob.cs" />
+    <Compile Include="Dropbox\RunDropboxJobByPlan.cs" />
+    <Compile Include="Dropbox\StopDropboxJob.cs" />
+    <Compile Include="Exchange\AddExchangeDistributionGroupPlan.cs" />
+    <Compile Include="Exchange\AddExchangePlan.cs" />
+    <Compile Include="Exchange\DeleteExchangeJob.cs" />
+    <Compile Include="Exchange\DeleteExchangePlan.cs" />
+    <Compile Include="Exchange\FindExchangeJobByPlan.cs" />
+    <Compile Include="Exchange\GetExchangeConnection.cs" />
+    <Compile Include="Exchange\GetExchangeJob.cs" />
+    <Compile Include="Exchange\GetExchangeMigrationPolicy.cs" />
+    <Compile Include="Exchange\GetExchangePlan.cs" />
+    <Compile Include="Exchange\RerunExchangeJob.cs" />
+    <Compile Include="Exchange\RunExchangeJobByPlan.cs" />
+    <Compile Include="Exchange\StopExchangeJob.cs" />
+    <Compile Include="FS\AddFSPlan.cs" />
+    <Compile Include="FS\DeleteFSJob.cs" />
+    <Compile Include="FS\DeleteFSPlan.cs" />
+    <Compile Include="FS\FindFSJobByPlan.cs" />
+    <Compile Include="FS\GetFSConnection.cs" />
+    <Compile Include="FS\GetFSJob.cs" />
+    <Compile Include="FS\GetFSMigrationPolicy.cs" />
+    <Compile Include="FS\GetFSPlan.cs" />
+    <Compile Include="FS\RerunFSJob.cs" />
+    <Compile Include="FS\RunFSJobByPlan.cs" />
+    <Compile Include="FS\StopFSJob.cs" />
+    <Compile Include="Gmail\AddGmailDistributionGroupPlan.cs" />
+    <Compile Include="Gmail\AddGmailPlan.cs" />
+    <Compile Include="Gmail\DeleteGmailJob.cs" />
+    <Compile Include="Gmail\DeleteGmailPlan.cs" />
+    <Compile Include="Gmail\FindGmailJobByPlan.cs" />
+    <Compile Include="Gmail\GetGmailMigrationPolicy.cs" />
+    <Compile Include="Gmail\GetGmailPlan.cs" />
+    <Compile Include="Gmail\GetGmailJob.cs" />
+    <Compile Include="Gmail\GetGmailConnection.cs" />
+    <Compile Include="Gmail\RerunGmailJob.cs" />
+    <Compile Include="Gmail\RunGmailJobByPlan.cs" />
+    <Compile Include="Gmail\StopGmailJob.cs" />
+    <Compile Include="GoogleDrive\AddGoogleDrivePlan.cs" />
+    <Compile Include="GoogleDrive\DeleteGoogleDriveJob.cs" />
+    <Compile Include="GoogleDrive\DeleteGoogleDrivePlan.cs" />
+    <Compile Include="GoogleDrive\FindGoogleDriveJobByPlan.cs" />
+    <Compile Include="GoogleDrive\GetGoogleDriveMigrationPolicy.cs" />
+    <Compile Include="GoogleDrive\GetGoogleDrivePlan.cs" />
+    <Compile Include="GoogleDrive\GetGoogleDriveJob.cs" />
+    <Compile Include="GoogleDrive\GetGoogleDriveConnection.cs" />
+    <Compile Include="GoogleDrive\RerunGoogleDriveJob.cs" />
+    <Compile Include="GoogleDrive\RunGoogleDriveJobByPlan.cs" />
+    <Compile Include="GoogleDrive\StopGoogleDriveJob.cs" />
+    <Compile Include="IMAP-POP3\AddIMAPPOP3Plan.cs" />
+    <Compile Include="IMAP-POP3\DeleteIMAPPOP3Job.cs" />
+    <Compile Include="IMAP-POP3\DeleteIMAPPOP3Plan.cs" />
+    <Compile Include="IMAP-POP3\FindIMAPPOP3JobByPlan.cs" />
+    <Compile Include="IMAP-POP3\GetIMAPPOP3MigrationPolicy.cs" />
+    <Compile Include="IMAP-POP3\GetIMAPPOP3Plan.cs" />
+    <Compile Include="IMAP-POP3\GetIMAPPOP3Job.cs" />
+    <Compile Include="IMAP-POP3\RerunIMAPPOP3Job.cs" />
+    <Compile Include="IMAP-POP3\RunIMAPPOP3JobByPlan.cs" />
+    <Compile Include="IMAP-POP3\StopIMAPPOP3Job.cs" />
+    <Compile Include="Models\AccountSummaryModel.cs" />
+    <Compile Include="Models\AppProfileModel.cs" />
+    <Compile Include="Models\BoxConnectionSummaryModel.cs" />
+    <Compile Include="Models\BoxJobExecutionModel.cs" />
+    <Compile Include="Models\BoxMappingContent.cs" />
+    <Compile Include="Models\BoxMigrationSharePointObject.cs" />
+    <Compile Include="Models\BoxObject.cs" />
+    <Compile Include="Models\BoxPlanMappingModel.cs" />
+    <Compile Include="Models\BoxPlanModel.cs" />
+    <Compile Include="Models\BoxPlanSettingsModel.cs" />
+    <Compile Include="Models\ConversationsMigrationSettings.cs" />
+    <Compile Include="Models\DatabaseSummaryModel.cs" />
+    <Compile Include="Models\DistributionGroupMigrationExchangeMailboxModel.cs" />
+    <Compile Include="Models\DropboxConnectionSummaryModel.cs" />
+    <Compile Include="Models\DropboxJobExecutionModel.cs" />
+    <Compile Include="Models\DropboxMappingContent.cs" />
+    <Compile Include="Models\DropboxMigrationSharePointObject.cs" />
+    <Compile Include="Models\DropboxObject.cs" />
+    <Compile Include="Models\DropboxPlanMappingModel.cs" />
+    <Compile Include="Models\DropboxPlanModel.cs" />
+    <Compile Include="Models\DropboxPlanSettingsModel.cs" />
+    <Compile Include="Models\ErrorModel.cs" />
+    <Compile Include="Models\ExchangeConnectionSummaryModel.cs" />
+    <Compile Include="Models\ExchangeDistributionGroupMappingContentModel.cs" />
+    <Compile Include="Models\ExchangeDistributionGroupMappingModel.cs" />
+    <Compile Include="Models\ExchangeDistributionGroupPlanModel.cs" />
+    <Compile Include="Models\ExchangeDistributionGroupPlanSettingsModel.cs" />
+    <Compile Include="Models\ExchangeJobExecutionModel.cs" />
+    <Compile Include="Models\ExchangeMailBoxModel.cs" />
+    <Compile Include="Models\ExchangeMappingContentModel.cs" />
+    <Compile Include="Models\ExchangeMappingModel.cs" />
+    <Compile Include="Models\ExchangePlanExecutionModel.cs" />
+    <Compile Include="Models\ExchangePlanModel.cs" />
+    <Compile Include="Models\ExchangePlanSettingsModel.cs" />
+    <Compile Include="Models\FSConnectionsSummaryModel.cs" />
+    <Compile Include="Models\FSJobExecutionModel.cs" />
+    <Compile Include="Models\FSMappingContent.cs" />
+    <Compile Include="Models\FSMappingModel.cs" />
+    <Compile Include="Models\FSMigrationSharePointObject.cs" />
+    <Compile Include="Models\FSPath.cs" />
+    <Compile Include="Models\FSPlanModel.cs" />
+    <Compile Include="Models\FSPlanSettingsModel.cs" />
+    <Compile Include="Models\GmailConnectionSummaryModel.cs" />
+    <Compile Include="Models\GmailDistributionGroupMappingContentModel.cs" />
+    <Compile Include="Models\GmailDistributionGroupMappingModel.cs" />
+    <Compile Include="Models\GmailDistributionGroupMigrationExchangeMailboxModel.cs" />
+    <Compile Include="Models\GmailDistributionGroupPlanModel.cs" />
+    <Compile Include="Models\GmailDistributionGroupPlanSettingsModel.cs" />
+    <Compile Include="Models\GmailJobExecutionModel.cs" />
+    <Compile Include="Models\GmailMappingContentModel.cs" />
+    <Compile Include="Models\GmailMappingModel.cs" />
+    <Compile Include="Models\GmailMigrationExchangeMailboxModel.cs" />
+    <Compile Include="Models\GmailPlanModel.cs" />
+    <Compile Include="Models\GmailPlanSettingsModel.cs" />
+    <Compile Include="Models\GoogleDriveConnectionSummaryModel.cs" />
+    <Compile Include="Models\GoogleDriveJobExecutionModel.cs" />
+    <Compile Include="Models\GoogleDriveMappingContent.cs" />
+    <Compile Include="Models\GoogleDriveMappingModel.cs" />
+    <Compile Include="Models\GoogleDriveMigrationSharePointObject.cs" />
+    <Compile Include="Models\GoogleDriveObject.cs" />
+    <Compile Include="Models\GoogleDrivePlanModel.cs" />
+    <Compile Include="Models\GoogleDrivePlanSettingsModel.cs" />
+    <Compile Include="Models\IMAPPOP3ConnectionModel.cs" />
+    <Compile Include="Models\IMAPPOP3JobExecutionModel.cs" />
+    <Compile Include="Models\IMAPPOP3MailBoxObject.cs" />
+    <Compile Include="Models\IMAPPOP3MappingContentModel.cs" />
+    <Compile Include="Models\IMAPPOP3MappingModel.cs" />
+    <Compile Include="Models\IMAPPOP3PlanModel.cs" />
+    <Compile Include="Models\IMAPPOP3PlanSettingsModel.cs" />
+    <Compile Include="Models\JobExecutionModel.cs" />
+    <Compile Include="Models\JobSummaryModel.cs" />
+    <Compile Include="Models\MSTeamsConnectionSummaryModel.cs" />
+    <Compile Include="Models\MSTeamsJobExecutionModel.cs" />
+    <Compile Include="Models\MSTeamsMappingContentModel.cs" />
+    <Compile Include="Models\MSTeamsMappingModel.cs" />
+    <Compile Include="Models\MSTeamsModel.cs" />
+    <Compile Include="Models\MSTeamsPlanExecutionModel.cs" />
+    <Compile Include="Models\MSTeamsPlanModel.cs" />
+    <Compile Include="Models\MSTeamsPlanSettingsModel.cs" />
+    <Compile Include="Models\Office365GroupConnectionSummaryModel.cs" />
+    <Compile Include="Models\Office365GroupJobExecutionModel.cs" />
+    <Compile Include="Models\Office365GroupMappingContentModel.cs" />
+    <Compile Include="Models\Office365GroupMappingModel.cs" />
+    <Compile Include="Models\Office365GroupModel.cs" />
+    <Compile Include="Models\Office365GroupPlanExecutionModel.cs" />
+    <Compile Include="Models\Office365GroupPlanModel.cs" />
+    <Compile Include="Models\Office365GroupPlanSettingsModel.cs" />
+    <Compile Include="Models\PageResultViewModelListJobSummaryModel.cs" />
+    <Compile Include="Models\PlanExecutionModel.cs" />
+    <Compile Include="Models\PlanGroupDetailsModel.cs" />
+    <Compile Include="Models\PlanGroupModel.cs" />
+    <Compile Include="Models\PlanGroupSummaryModel.cs" />
+    <Compile Include="Models\PlanNameLabel.cs" />
+    <Compile Include="Models\PlanSummaryModel.cs" />
+    <Compile Include="Models\PolicySummaryModel.cs" />
+    <Compile Include="Models\ScheduleDetailsModel.cs" />
+    <Compile Include="Models\ScheduleModel.cs" />
+    <Compile Include="Models\ServiceResponseListAccountSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListAppProfileModel.cs" />
+    <Compile Include="Models\ServiceResponseListBoxConnectionSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListDatabaseSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListDropboxConnectionSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListExchangeConnectionSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListFSConnectionsSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListGmailConnectionSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListGoogleDriveConnectionSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListMSTeamsConnectionSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListOffice365GroupConnectionSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListPlanGroupSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListPlanSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListPolicySummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseListSharePointConnectionRegistrationResultModel.cs" />
+    <Compile Include="Models\ServiceResponseListSlackConnectionSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponsePageResultViewModelListJobSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponsePlanGroupDetailsModel.cs" />
+    <Compile Include="Models\ServiceResponsePlanSummaryModel.cs" />
+    <Compile Include="Models\ServiceResponseStatusResultModel.cs" />
+    <Compile Include="Models\ServiceResponseString.cs" />
+    <Compile Include="Models\SharePointConnectionCollectionModel.cs" />
+    <Compile Include="Models\SharePointConnectionModel.cs" />
+    <Compile Include="Models\SharePointConnectionRegistrationResultModel.cs" />
+    <Compile Include="Models\SharePointCredential.cs" />
+    <Compile Include="Models\SharePointJobExecutionModel.cs" />
+    <Compile Include="Models\SharePointMappingContent.cs" />
+    <Compile Include="Models\SharePointMappingModel.cs" />
+    <Compile Include="Models\SharePointObject.cs" />
+    <Compile Include="Models\SharePointPlanExecutionModel.cs" />
+    <Compile Include="Models\SharePointPlanModel.cs" />
+    <Compile Include="Models\SharePointPlanSettingsModel.cs" />
+    <Compile Include="Models\SlackConnectionSummaryModel.cs" />
+    <Compile Include="Models\SlackJobExecutionModel.cs" />
+    <Compile Include="Models\SlackMappingContentModel.cs" />
+    <Compile Include="Models\SlackMappingModel.cs" />
+    <Compile Include="Models\SlackMigrationMSTeamsObject.cs" />
+    <Compile Include="Models\SlackPlanModel.cs" />
+    <Compile Include="Models\SlackPlanSettingsModel.cs" />
+    <Compile Include="Models\StatusResultModel.cs" />
+    <Compile Include="MSTeams\AddMSTeamsPlan.cs" />
+    <Compile Include="MSTeams\DeleteMSTeamsJob.cs" />
+    <Compile Include="MSTeams\DeleteMSTeamsPlan.cs" />
+    <Compile Include="MSTeams\FindMSTeamsJobByPlan.cs" />
+    <Compile Include="MSTeams\GetMSTeamsMigrationPolicy.cs" />
+    <Compile Include="MSTeams\GetMSTeamsPlan.cs" />
+    <Compile Include="MSTeams\GetMSTeamsJob.cs" />
+    <Compile Include="MSTeams\GetMSTeamsConnection.cs" />
+    <Compile Include="MSTeams\RerunMSTeamsJob.cs" />
+    <Compile Include="MSTeams\RunMSTeamsJobByPlan.cs" />
+    <Compile Include="MSTeams\StopMSTeamsJob.cs" />
+    <Compile Include="Office365Group\AddOffice365GroupPlan.cs" />
+    <Compile Include="Office365Group\DeleteOffice365GroupJob.cs" />
+    <Compile Include="Office365Group\DeleteOffice365GroupPlan.cs" />
+    <Compile Include="Office365Group\FindOffice365GroupJobByPlan.cs" />
+    <Compile Include="Office365Group\GetOffice365GroupMigrationPolicy.cs" />
+    <Compile Include="Office365Group\GetOffice365GroupPlan.cs" />
+    <Compile Include="Office365Group\GetOffice365GroupJob.cs" />
+    <Compile Include="Office365Group\GetOffice365GroupConnection.cs" />
+    <Compile Include="Office365Group\RerunOffice365GroupJob.cs" />
+    <Compile Include="Office365Group\RunOffice365GroupJobByPlan.cs" />
+    <Compile Include="Office365Group\StopOffice365GroupJob.cs" />
+    <Compile Include="PlanGroup\AddPlanGroup.cs" />
+    <Compile Include="PlanGroup\DeletePlanGroup.cs" />
+    <Compile Include="PlanGroup\GetPlanGroupById.cs" />
+    <Compile Include="PlanGroup\GetPlanGroups.cs" />
+    <Compile Include="PlanGroup\RunJobByPlanGroup.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Slack\AddSlackPlan.cs" />
+    <Compile Include="Slack\DeleteSlackJob.cs" />
+    <Compile Include="Slack\DeleteSlackPlan.cs" />
+    <Compile Include="Slack\FindSlackJobByPlan.cs" />
+    <Compile Include="Slack\GetSlackMigrationPolicy.cs" />
+    <Compile Include="Slack\GetSlackPlan.cs" />
+    <Compile Include="Slack\GetSlackJob.cs" />
+    <Compile Include="Slack\GetSlackConnection.cs" />
+    <Compile Include="Slack\RerunSlackJob.cs" />
+    <Compile Include="Slack\RunSlackJobByPlan.cs" />
+    <Compile Include="Slack\StopSlackJob.cs" />
+    <Compile Include="SP\AddSharePointConnections.cs" />
+    <Compile Include="SP\AddSPPlan.cs" />
+    <Compile Include="SP\DeleteSPJob.cs" />
+    <Compile Include="SP\DeleteSPPlan.cs" />
+    <Compile Include="SP\FindSPJobByPlan.cs" />
+    <Compile Include="SP\GetSPJob.cs" />
+    <Compile Include="SP\GetSPMigrationPolicy.cs" />
+    <Compile Include="SP\GetSPPlan.cs" />
+    <Compile Include="SP\RerunSPJob.cs" />
+    <Compile Include="SP\RunSPJobByPlan.cs" />
+    <Compile Include="SP\StopSPJob.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
