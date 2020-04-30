@@ -24,6 +24,5 @@ Add-Type @"
 
 ## Get FLY URL and API Key
 To ensure your PowerShell scripts can connect to FLY, you must set values for the BaseUri and ApiKey parameters.
-The URL of your FLY Manager. 
-1. BaseUri - The URL of you FLY Manager. For example, https://localhost:20100
+1. BaseUri - The URL of your FLY Manager. For example, https://localhost:20100
 2. ApiKey - The key to authorize the API calls. You can get the API key from FLY interface > Management > General Settings > API Keys.
