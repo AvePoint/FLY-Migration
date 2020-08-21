@@ -1,0 +1,3 @@
+Source Account Name,Source Profile Name,Dest Account Name,Dest Profile Name,Mapping Csv,Mapping Method
+zhang@yunshu.onmicrosoft.com,,zhang@yunshu.onmicrosoft.com,,sp_2_1.csv,Combine/Promote/AttachAsChild
+zhang@yunshu.onmicrosoft.com,,zhang@yunshu.onmicrosoft.com,,sp_2_2.csv,Combine/Promote/AttachAsChild

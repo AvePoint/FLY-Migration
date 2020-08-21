@@ -1,0 +1,3 @@
+Source Url,Source Level,Dest Url,Dest Level,Mapping Method
+https://yunshu.sharepoint.com/sites/wf_sou,SiteCollection,https://yunshu.sharepoint.com/sites/wf_sou,SiteCollection,Combine
+https://yunshu.sharepoint.com/sites/wf_sou,Site/Folder/List/SiteCollection,https://yunshu.sharepoint.com/sites/wf_sou,Site/Folder/List/SiteCollection,Combine

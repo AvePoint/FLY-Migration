@@ -1,0 +1,5 @@
+Source Email Address,Source Type,Destination Email Address,Destination Type,Migrate Archived Mailboxes,Migrate Recoverable Item Folder,Convert To Shared Mailbox
+accouwntingrx@newmarketinc.com,SharedMailbox,hospitality.accountingrx@amadeus.com,SharedMailbox,FALSE,FALSE,FALSE
+accouentsreceivableMB@newmarketinc.com,SharedMailbox,hospitality.accountsreceivableMB@amadeus.com,SharedMailbox,FALSE,FALSE,FALSE
+ACPaMSKeyDates@newmarketinc.com,SharedMailbox,hospitality.ACPMSKeyDates@amadeus.com,SharedMailbox,FALSE,FALSE,FALSE
+ACPMSrProductManagement@newmarketinc.com,SharedMailbox,hospitality.ACPMSProductManagement@amadeus.com,SharedMailbox,FALSE,FALSE,FALSE
