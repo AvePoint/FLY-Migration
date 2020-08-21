@@ -1,0 +1,3 @@
+﻿MailAddress,LegacyExchangeDN
+demouser1@contoso.onmicrosoft.com,/o=exchangedemo/ou=exchange administrative group (testdemo)/cn=recipients/cn=c5b8a1b8d3074d6dba1b07b69ebab827-demouser1
+demouser2@contoso.onmicrosoft.com,/o=exchangedemo/ou=exchange administrative group (testdemo)/cn=recipients/cn=c5b8a1b8d3074d6dba1b07b69ebab827-demouser2
