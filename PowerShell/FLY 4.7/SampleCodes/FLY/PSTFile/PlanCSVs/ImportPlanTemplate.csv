@@ -1,0 +1,2 @@
+Service Account,Password,UNC Path,Destination Connection,Mapping Csv
+Example:contoso\username,password,\\admin-PC\c$\data or \\admin-PC\shared folder,connection name or id,PstImportPlan-1.csv

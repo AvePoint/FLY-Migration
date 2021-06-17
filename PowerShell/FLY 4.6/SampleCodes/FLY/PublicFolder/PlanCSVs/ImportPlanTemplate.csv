@@ -1,0 +1,4 @@
+Source Connection,Destination Connection,Mapping Csv
+connctionName1 or ConnectionID1,connctionName1 or ConnectionID1,PublicFolder_1_1.csv
+connctionName2 or ConnectionID2,connctionName2 or ConnectionID2,PublicFolder_1_2.csv
+connctionName2 or ConnectionID2,connctionName2 or ConnectionID2,PublicFolder_1_3.csv

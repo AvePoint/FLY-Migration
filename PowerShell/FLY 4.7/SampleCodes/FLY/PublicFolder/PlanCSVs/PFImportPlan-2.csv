@@ -1,0 +1,3 @@
+Source,Destination
+publicfoldersource,publicfolderdestination
+publicfoldersource\subfolder,publicfolderdestination\subfolder
