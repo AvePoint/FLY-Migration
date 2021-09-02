@@ -9,14 +9,14 @@ $ret = @()
   foreach($info in $csvContent){
     try
     {
-        $maxReceiveSize=$info.MaxReceiveSizeMB+'mb'
+        $maxReceiveSize=$info.MaxReceiveSizeMB+'MB'
         Write-Host "Set Mailbox: $($info.MailAddress)"
         Set-Mailbox -Identity $info.MailAddress -MaxReceiveSize $maxReceiveSize -ErrorAction Stop
         Write-Host "Successful to Set Mailbox: $($info.MailAddress)"
         $mobj = New-Object -TypeName PSCustomObject
         $mobj | Add-Member -MemberType NoteProperty -Name "MailAddress" -Value $info.MailAddress
         $mobj | Add-Member -MemberType NoteProperty -Name "MaxReceiveSizeMB" -Value $info.MaxReceiveSizeMB
-        $mobj | Add-Member -MemberType NoteProperty -Name "Status" -Value "Successfull"
+        $mobj | Add-Member -MemberType NoteProperty -Name "Status" -Value "Successful"
         $mobj | Add-Member -MemberType NoteProperty -Name "Comment" -Value ""
         $ret += $mobj
 

@@ -69,12 +69,12 @@ if ($csvReport.length -gt 0)
   }
   else
   {
-    Write-Warning "There are no mail enbaled public folders."
+    Write-Warning "There are no mail enabled public folders."
   }
   }
   catch
   {
-    Write-Warning "Failed to get mail enbaled public folders."
+    Write-Warning "Failed to get mail enabled public folders."
   }
 Write-Host "If there are any errors, please check the log:$($logPath)" -ForegroundColor Green
 

@@ -13,7 +13,7 @@ foreach($info in $csvContent){
         $mobj = New-Object -TypeName PSCustomObject
         $mobj | Add-Member -MemberType NoteProperty -Name "MailAddress" -Value $info.MailAddress
         $mobj | Add-Member -MemberType NoteProperty -Name "LegacyExchangeDN" -Value $info.LegacyExchangeDN
-        $mobj | Add-Member -MemberType NoteProperty -Name "Status" -Value "Successfull"
+        $mobj | Add-Member -MemberType NoteProperty -Name "Status" -Value "Successful"
         $mobj | Add-Member -MemberType NoteProperty -Name "Comment" -Value ""
         $ret += $mobj
 

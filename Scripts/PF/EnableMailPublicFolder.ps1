@@ -1,6 +1,6 @@
 # .SYNOPSIS
 #  FLYEnableMailPublicFolder.ps1
-#  According to mapping file, enbale the public folder mail settings.
+#  According to mapping file, enable the public folder mail settings.
 #
 # .DESCRIPTION
 #
