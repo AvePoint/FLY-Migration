@@ -1,0 +1,3 @@
+Source Email Address,Source Type,Destination Email Address,Destination Type,Migrate Archive Folder
+source emial address1,UserMailbox,destination email address1,UserMailbox,False
+source emial address2,ResourceMailbox,destination email address2,SharedMailbox,True
