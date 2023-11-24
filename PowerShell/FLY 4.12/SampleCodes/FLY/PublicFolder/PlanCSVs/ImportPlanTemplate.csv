@@ -1,0 +1,4 @@
+Source Connection,Destination Connection,Mapping Csv
+ConnectionName1 or ConnectionID1,ConnectionName1 or ConnectionID1,PFImportPlan-1.csv
+ConnectionName2 or ConnectionID2,ConnectionName2 or ConnectionID2,PFImportPlan-2.csv
+ConnectionName3 or ConnectionID3,ConnectionName3 or ConnectionID3,PFImportPlan-3.csv

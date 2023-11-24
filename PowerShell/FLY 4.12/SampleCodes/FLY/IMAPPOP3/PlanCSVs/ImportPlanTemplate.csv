@@ -1,0 +1,3 @@
+Server Name,Port,EnableSSL,Destination Connection,Destination Type,Mapping Csv
+imap-mail.outlook.com,993,True,Connection id1 or name1,Online,ImapImportPlan-1.csv
+imap-mail.outlook.com,143,False,Connection id1 or name1,OnPremises,ImapImportPlan-2.csv
