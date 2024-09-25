@@ -1,16 +1,63 @@
-﻿
-$invocation = (Get-Variable MyInvocation).Value
-$directoryPath = (Get-Item $invocation.MyCommand.Path).Directory.FullName
-$OneDriveUsers = Import-Csv "$($directoryPath)\\OneDriveUsers.csv" -Encoding UTF8
-$dateName = "AvePoint_GetQuota_{0}" -f (Get-Date).ToString("yyyyMMddHHmmss")
-$logPath = $directoryPath + "\" + $dateName + ".log"
-$csvPath = $directoryPath + "\" + $dateName + ".csv"
-"URL" +"," + "Status"+ ",Comment" | Out-File -FilePath $csvPath -Encoding utf8 -Append -Force
+﻿<#
+DESCRIPTION
+Register your own Azure AD App in order to authentication
 
-$password = Read-host -assecurestring "Enter Certificate Key of Custom App"
-$appId = 'Custom App client ID'
-$appName = 'Custom App Display name'  
-$connection = Connect-PnPOnline -Url 'SharePoint Admin Center URL'  -ClientId 'PnP PowerShell For Grant FullControl App client ID' -Interactive
+PARAMETERS
+-Tenant 
+ The identifier of your tenant, e.g. mytenant.onmicrosoft.com
+ Required: True
+
+-AzureEnvironment
+ The Azure environment to use for authentication, the defaults to 'Production' which is the main Azure environment.
+ Accepted values: Production, PPE, China, Germany, USGovernment, USGovernmentHigh, USGovernmentDoD, Custom  
+ Required: True
+-ApplicationName
+
+ The name of the Azure AD Application to create.
+ Required: False
+#>
+
+Param
+(
+    [Parameter(Mandatory=$true)][String]$Tenant,
+	[Parameter(Mandatory=$true)][String]$AzureEnvironment = "Production",    
+    [Parameter(Mandatory=$false)][String]$ApplicationName = "PnP PowerShell For Grant FullControl"
+)
+
+$Invocation = (Get-Variable MyInvocation).Value
+$DirectoryPath = (Get-Item $Invocation.MyCommand.Path).Directory.FullName
+$LogPath = $DirectoryPath + "\Register Azure AD App_$([DateTime]::Now.ToString("yyyyMMddHHmmssfff")).log"
+Function Main {
+	
+    Write-LogInfo -LogPath $LogPath -Message "Begin to run Script." -ToScreen
+    CheckPnPEnvironment
+    $app = Register-PnPAzureADApp -ApplicationName $ApplicationName -Tenant $Tenant -Interactive -AzureEnvironment $AzureEnvironment  -SharePointDelegatePermissions AllSites.FullControl,User.Read.All -GraphDelegatePermissions Sites.FullControl.All,User.Read.All
+    Write-LogInfo -LogPath $LogPath -Message "AzureAppId/ClientId    : $($app.'AzureAppId/ClientId')"  -ToScreen
+    Write-LogInfo -LogPath $LogPath -Message "Pfx file               : $($app.'Pfx file')"  -ToScreen
+    Write-LogInfo -LogPath $LogPath -Message "Cer file               : $($app.'Cer file')"  -ToScreen
+    Write-LogInfo -LogPath $LogPath -Message "Certificate Thumbprint : $($app.'Certificate Thumbprint')"  -ToScreen
+    Write-LogInfo -LogPath $LogPath -Message $app
+    Write-LogInfo -LogPath $LogPath -Message "Finished to run Script" -ToScreen
+}
+
+
+Function CheckPnPEnvironment{
+
+    $HasPnp = Get-Module -ListAvailable -FullyQualifiedName "PnP.PowerShell"
+    if($HasPnp.Count -eq 0)
+    {
+        try
+        {
+            Install-Module PnP.PowerShell -RequiredVersion 1.40.0 -Scope CurrentUser
+            Write-LogInfo -LogPath $LogPath -Message "Don't have PnP PowerShell, install successful." -ToScreen
+        }
+        catch
+        {
+            Write-LogError -LogPath $LogPath -Message "Failed to install PnP PowerShell, Message: [$($_.ToString())]" -ToScreen -Exception $_
+        }
+    }
+}
+
 
 Function Write-LogInfo
 {
@@ -23,47 +70,15 @@ Function Write-LogInfo
 
     Process 
     {
-        #Add TimeStamp to message if specified
-        $Message = "INFO:  [$([DateTime]::Now.ToString("yyyy-MM-dd HH:mm:ss:fff"))] $Message"
-
-        #Write Content to Log
+        $Message = "INFO:  [$([DateTime]::Now.ToString("yyyy-MM-dd HH:mm:ss:fff"))] $Message  "
+        
         Add-Content -Path $LogPath -Value $Message
-
-        #Write to screen for debug mode
+     
         Write-Debug $Message
 
-        #Write to scren for ToScreen mode
         If ( $ToScreen -eq $True ) 
         {
             Write-Host -ForegroundColor Green $Message
-        }
-    }
-}
-
-Function Write-LogDebug
-{
-    [CmdletBinding()]
-    Param (
-        [Parameter(Mandatory=$true,Position=0)][string]$LogPath,
-        [Parameter(Mandatory=$true,Position=1,ValueFromPipeline=$true)][string]$Message,
-        [Parameter(Mandatory=$false,Position=2)][switch]$ToScreen
-    )
-
-    Process 
-    {
-        #Add TimeStamp to message if specified
-        $Message = "DEBUG: [$([DateTime]::Now.ToString("yyyy-MM-dd HH:mm:ss:fff"))] $Message"
-
-        #Write Content to Log
-        Add-Content -Path $LogPath -Value $Message
-
-        #Write to screen for debug mode
-        Write-Debug $Message
-
-        #Write to scren for ToScreen mode
-        If ( $ToScreen -eq $True ) 
-        {
-            Write-Host -ForegroundColor White $Message
         }
     }
 }
@@ -74,21 +89,19 @@ Function Write-LogError
     Param (
         [Parameter(Mandatory=$true,Position=0)][string]$LogPath,
         [Parameter(Mandatory=$true,Position=1,ValueFromPipeline=$true)][string]$Message,
-        [Parameter(Mandatory=$false,Position=2)][switch]$ToScreen
+        [Parameter(Mandatory=$false,Position=2)][switch]$ToScreen,
+        [Parameter(Mandatory=$false,Position=3)][object]$Exception
+
     )
 
     Process 
     {
-        #Add TimeStamp to message if specified
-        $Message = "ERROR: [$([DateTime]::Now.ToString("yyyy-MM-dd HH:mm:ss:fff"))] $Message"
+        $Message = "ERROR:  [$([DateTime]::Now.ToString("yyyy-MM-dd HH:mm:ss:fff"))] $Message  "
 
-        #Write Content to Log
         Add-Content -Path $LogPath -Value $Message
 
-        #Write to screen for debug mode
         Write-Debug $Message
 
-        #Write to scren for ToScreen mode
         If ( $ToScreen -eq $True ) 
         {
             Write-Host -ForegroundColor Red $Message
@@ -96,37 +109,12 @@ Function Write-LogError
     }
 }
 
-
-Write-LogInfo -LogPath $logPath -Message "Start to run script." -ToScreen  
-foreach($user in $OneDriveUsers)
-{   
-    try
-    {
-       $OneDriveUrl= Get-PnPUserProfileProperty -Account $user.Account | Select PersonalUrl
-       $premissionInfo=Grant-PnPAzureADAppSitePermission -AppId $appId -DisplayName $appName -Site $OneDriveUrl.PersonalUrl -Permissions Read -Verbose -Connection $connection
-       $premissionInfo.Id
-       Set-PnPAzureADAppSitePermission -Site $OneDriveUrl.PersonalUrl -Permissions FullControl -PermissionId $premissionInfo.Id -Connection $connection
-       $($OneDriveUrl.PersonalUrl) + ",Successful" | Out-File -FilePath $csvPath -Encoding utf8 -Append -Force
-       Write-LogDebug -LogPath $logPath -Message "Add full control successful. OneDrive: $($OneDriveUrl.PersonalUrl)" -ToScreen  
-    }
-    catch
-    {   
-        $($OneDriveUrl.PersonalUrl) + ",Failed" +","+ $($_.ToString()) | Out-File -FilePath $csvPath -Encoding utf8 -Append -Force    
-        Write-LogError -LogPath $logPath -Message "Failed to add Full control $($OneDriveUrl.PersonalUrl). Message: $($_.ToString())" -ToScreen       
-    }
-    
-}
-Write-LogInfo -LogPath $logPath -Message "End to run script." -ToScreen
-
-
-
-
-
+Main
 # SIG # Begin signature block
 # MIIoHQYJKoZIhvcNAQcCoIIoDjCCKAoCAQExDzANBglghkgBZQMEAgEFADB5Bgor
 # BgEEAYI3AgEEoGswaTA0BgorBgEEAYI3AgEeMCYCAwEAAAQQH8w7YFlLCE63JNLG
-# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCAkNQf+92Ib37Te
-# 2XlbpxNaprfLDii5Q4cSghEDP5ox7qCCDZowggawMIIEmKADAgECAhAIrUCyYNKc
+# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCAoOvHt0ookttoa
+# tesghBBU08L3DGNuengJvzpv/BL8LKCCDZowggawMIIEmKADAgECAhAIrUCyYNKc
 # TJ9ezam9k67ZMA0GCSqGSIb3DQEBDAUAMGIxCzAJBgNVBAYTAlVTMRUwEwYDVQQK
 # EwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xITAfBgNV
 # BAMTGERpZ2lDZXJ0IFRydXN0ZWQgUm9vdCBHNDAeFw0yMTA0MjkwMDAwMDBaFw0z
@@ -204,19 +192,19 @@ Write-LogInfo -LogPath $logPath -Message "End to run script." -ToScreen
 # bmluZyBSU0E0MDk2IFNIQTM4NCAyMDIxIENBMQIQD3PbKnfwZFFLFp9BUDAdFDAN
 # BglghkgBZQMEAgEFAKB8MBAGCisGAQQBgjcCAQwxAjAAMBkGCSqGSIb3DQEJAzEM
 # BgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMC8GCSqG
-# SIb3DQEJBDEiBCDeWPdJR9yjVwxeesQhJEV4zTyyFtDNMdq7s5VVj2NIhjANBgkq
-# hkiG9w0BAQEFAASCAYBJO6DfiyRXM6zmGKisjvD1ZkMOgDX5Bg127GGC52k8MpFH
-# RqZ8TKqnkVzRbatK4Yj2REFhKVu9P7l5Yxjna7Co7h9NtOH4dEsR66w1KeyfJQJW
-# vKBgQ82RqcvNDuwFO9Pn2u45AAmthEwfKajlE8XThD66PfCpuSVGR9Nq63+rtUVM
-# sRIv6RwBcyrNkRp6+GvDBx70wEbontlR5pVAtc3BJte/84RqNbI7Fdsr5I8Hmesx
-# WQlFBjyKKlm786T9kEbtcFGFPvYsUBccgGHmSzlehqqxJui8CYT04js86oA35z41
-# LeIMZaR+pbMFnDoAobYT8YkcOxXfMyxKC2pS9DeoOF80rB8LqSw+aJvOSt6W2R8y
-# 1vPA+36b9PKjJ4VG6oqrWnuhr6J47uL4C50SrbT0TiGbod93HljNprX5ZXaXjsv/
-# 94hCAdhMJxjN2irOJMauum68mgB781mAkF3wO0YMAwXqpZgHExT9pe+V1P/yedXZ
-# 1LRKPbAvrbs3koy5fnahghcvMIIXKwYKKwYBBAGCNwMDATGCFxswghcXBgkqhkiG
+# SIb3DQEJBDEiBCAB8/6FPg8sz4HrziPEUJiNU3Dg+ZaPWnwaS4fQND/c3DANBgkq
+# hkiG9w0BAQEFAASCAYC0Ro5Q6jdkysvD3is3V8JU7hCByQIBoQSbCfwsqpZn+dO6
+# nSqXZWEQo62lOeCvj7/GLFRLRDktPVMyRsbM1VluKHXWu+fmhCfrKb7nKfEMhvfe
+# Ocec3phdN/U2/+6nwh93P7odcAWa7wxkmcNn2vxTKdQp3+XFsF/JK6pH/yfKOsoI
+# 6hFwcGhBacknAIAIwHw1tuN2ARBo2RzCcYuR2AvRIG7/YkjUfYWk1U76E4yViHB/
+# D7dMc5/xn4d7+JpNA1sPqD5dU+8mR5yfMKeyjarfLRHMh7MsqZT7/hfb7f99RYPT
+# a57gSdZfXhC36Vhy2+YOol85Elq/OPvy1FMhOWHT7NwFQ8h/mXPNn0tjqgyM4biT
+# 2Z2Nhe8px0/vpM+mVPCZ9wSqX9q+C/60KoAJmyJ2964Sc62H2mw7eEwJekFp4NuP
+# 9yYQ1FrCzarMx6tpYsWBAQ/3M1LZS1MISoS8BUvleGbjyUFlkAOgpNRabz935NBQ
+# IcfNYJ9ZeZOrOfeTnSmhghcvMIIXKwYKKwYBBAGCNwMDATGCFxswghcXBgkqhkiG
 # 9w0BBwKgghcIMIIXBAIBAzEPMA0GCWCGSAFlAwQCAQUAMGcGCyqGSIb3DQEJEAEE
-# oFgEVjBUAgEBBglghkgBhv1sBwEwITAJBgUrDgMCGgUABBRAJc4CHuvFBcod9Bgd
-# Zgdpb+FsdgIQNGZ4OdipAeuLevMAEE/rFhgPMjAyNDA5MTkwNjA4MTVaoIITCTCC
+# oFgEVjBUAgEBBglghkgBhv1sBwEwITAJBgUrDgMCGgUABBShq7R+GWYUyMYLvjct
+# rHcGTs3c1QIQGQu3jLheS8rAv8IPz70BGxgPMjAyNDA5MTkwNjA5MzJaoIITCTCC
 # BsIwggSqoAMCAQICEAVEr/OUnQg5pr/bP1/lYRYwDQYJKoZIhvcNAQELBQAwYzEL
 # MAkGA1UEBhMCVVMxFzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMTswOQYDVQQDEzJE
 # aWdpQ2VydCBUcnVzdGVkIEc0IFJTQTQwOTYgU0hBMjU2IFRpbWVTdGFtcGluZyBD
@@ -322,20 +310,20 @@ Write-LogInfo -LogPath $logPath -Message "End to run script." -ToScreen
 # AlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE7MDkGA1UEAxMyRGlnaUNlcnQg
 # VHJ1c3RlZCBHNCBSU0E0MDk2IFNIQTI1NiBUaW1lU3RhbXBpbmcgQ0ECEAVEr/OU
 # nQg5pr/bP1/lYRYwDQYJYIZIAWUDBAIBBQCggdEwGgYJKoZIhvcNAQkDMQ0GCyqG
-# SIb3DQEJEAEEMBwGCSqGSIb3DQEJBTEPFw0yNDA5MTkwNjA4MTVaMCsGCyqGSIb3
+# SIb3DQEJEAEEMBwGCSqGSIb3DQEJBTEPFw0yNDA5MTkwNjA5MzJaMCsGCyqGSIb3
 # DQEJEAIMMRwwGjAYMBYEFGbwKzLCwskPgl3OqorJxk8ZnM9AMC8GCSqGSIb3DQEJ
-# BDEiBCDzyT2C1IVF0ZISTxcyJpW4OVoHFGunVibxrA5kvESqkzA3BgsqhkiG9w0B
+# BDEiBCCSYBdXFHZPbh+Ith/faUtW5/QonWkk7l9RuwLSmwmt8TA3BgsqhkiG9w0B
 # CRACLzEoMCYwJDAiBCDS9uRt7XQizNHUQFdoQTZvgoraVZquMxavTRqa1Ax4KDAN
-# BgkqhkiG9w0BAQEFAASCAgCBFcziyR5v1gQ7vsJwdaJ1cjYcj2mJvWe/WgIU4pJF
-# UwfNLNPWMXkW+uNErInSs4Ma4VgdZvcjw1ispR4Z9I9Ykdd8BEhaHre3yHxHrhl7
-# 8hvKL4PI53z61V6xFr3Ly+BTF7byi8SPXnxoKNuY8d2NMCWNW9SciJ47dGJ0kVGL
-# s9MXe/bw+t19TUl8jNAx8HeisfnhLrk6J2jd1e9Xw/LnhwLRmuHKDl9RgxvuBPUf
-# v/zsPxSwKm1gapAxGVLNNEF784NNiH4JZJn8+z6WaQcJKZgn7auN5swIijFq+Lcv
-# KrZv0xJ7RVA2kmjgunwNAoJ+6moeLv8HsdZvA358MO9kgExpuczW3xdRmFmIJYfC
-# rE6HjkP3BK3sh72fj5xavxaWxa7jC53Yj0XpS+p83wg9nSTJukPSdPBxYk/CqQt9
-# IL773PBAC1B6rKn6QcGuwCAWTRpU1WaarvRkbKj58qBGyf18L9SIm3V/F57EAG6y
-# S0DSxRvGQpphL7g4WB/o3Ux3OKXry7H10pXU5WZ+l7pOQMyBabqTZw8M2C+Kb/gt
-# OtnJwPIW0678fH22d04wX72+f83eneYUpKBe+vyEhvVwUv/SkmVMs/IVBCuHyqhx
-# eSs9oY7BqcAjGQQtNRa68DtvXVXKaUnbt1WQQ4r+ayD3d1hbq/DI4CzuL/13c9xA
-# QA==
+# BgkqhkiG9w0BAQEFAASCAgBlmiOAZB4NlBbALN7c3eFMXI5mzsnAkDpuYgR/2ipp
+# fUnyV6yfSE93Adhdfu+ZbbtoXN8NJm0JOM93LksayZ26nByOvEmbJGat9Gua2PEd
+# pKnJuUr12l87IFyP85ySQHAhrd7WKm0AYQjRV1ftYaRk7H1knV9DqZFbuaJF5QyL
+# TIm9Wy3juq9znBAfOYQWcAUeDFGxr4OE2brTJ66PHWiGZwHedEUF/RLvYban355N
+# 5WKJkCrfA3ZAaxsNzFEeNbrwKEg2Jw9oUxP2jBPpg+mcfikIxOiZSorUDjC8NaoM
+# VSiKi8fecMVsSqSqRCumZFyq0cqim6NsUjeSZusGih2zgumDi+OeETBisDFvuHXJ
+# qXZC5LctahAFwZl0mT48R2QQMyGTYg+uUcrp3PSj91vRqaATi6WXkmPtOQhAFur1
+# VCjA2fbmL6DhTE75DVJ7+33V8QfKOJ3yrVu7d9LxfiLZDF7TBfB8MDY4xBCVZ9Y8
+# 8ANfKpnOG3Tk4gjFDPeqVxPAR2Wry9BJcUGbPR70HVNI2Xk/5NzOiEV+op4LINl5
+# YnoYisn2hpXDEk+79YNeCBCGMu8ZAvmmO2upP25BraL3cn8Fg8Y/g9/SiGu+7Gkp
+# NQ7jx9Ni3yJoy++0bY5a1gCQbhkAs2h04MuCHh5gEs7Jv/mU1uSlx/aLkmnKl1tr
+# oA==
 # SIG # End signature block
