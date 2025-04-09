@@ -26,42 +26,56 @@
  *
  *  Unpublished - All rights reserved under the copyright laws of the United States.
  */ #>
-Install-Module PnP.PowerShell
-$SrcSiteUrl = ""
-$DestSiteUrl = ""
-$OutputFilePath = "C:\xxxxxx\Mapping.csv"
-Connect-PnPOnline -Url $SrcSiteUrl -UseWebLogin
-$allWebs = Get-PnPSubWeb -Recurse
-
-if(Test-Path $OutputFilePath)
+$user=Read-Host "Enter Admin User MailBox"
+$csvPath = Read-Host "MainBoxCsvPath"
+$groups = Import-csv $csvPath
+$Add = Read-Host "Add or Remove User to Owner? Y or N"
+foreach($group in $groups)
 {
-    remove-Item -Recurse -Force $OutputFilePath
-}
-#RootSite
-$Data = New-Object PSObject
-$Data | Add-Member NoteProperty "Source URL"($SrcSiteUrl) 
-$Data | Add-Member NoteProperty "Source object level"("Site collection")
-$Data | Add-Member NoteProperty "Destination URL"($DestSiteUrl)
-$Data | Add-Member NoteProperty "Destination object level"("Site collection")
-$Data | Add-Member NoteProperty "Method"("Merge")
-$Data | Export-CSV $OutputFilePath -NoTypeInformation -Append -Encoding UTF8 -Force
+	try
+	{
+        $g=Get-UnifiedGroup $group.'Source Mailbox'|Select DisplayName,PrimarySmtpAddress
+        if($Add.ToLower().Equals("y"))
+        {
+            Write-Host "Add User to Group Team:" $g.DisplayName
+		    Add-UnifiedGroupLinks -Identity $g.PrimarySmtpAddress -LinkType Members -Links $user
+            Add-UnifiedGroupLinks -Identity $g.PrimarySmtpAddress -LinkType Owners -Links $user
+        }
+        elseif($Add.ToLower().Equals("n"))
+        {
+            Write-Host "Remove User from Group Team:" $g.DisplayName
+            $owners= Get-UnifiedGroupLinks -Identity $g.PrimarySmtpAddress -LinkType Owners|select Name| Measure
+            if($owners.Count -gt 1)
+            {
+                Remove-UnifiedGroupLinks -Identity $g.PrimarySmtpAddress -LinkType Owners -Links $user -Confirm:$false
+                #Write-Host "Remove This user from owners success"
+            }     
+            else
+            {
+                #Write-Host "Skip this group since it has only one owner"
+            }                   
+            Remove-UnifiedGroupLinks -Identity $g.PrimarySmtpAddress -LinkType Members -Links $user -Confirm:$false
+            
+        }
+        else 
+        {
+            Write-Host "Please input the right paramter";
+        }
+	}
+	catch
+	{
+		$ErrorMessage = $_.Exception.Message
+	}
 
-#subsites
-foreach($web in $allWebs)
-{
-    $Data = New-Object PSObject
-    $Data | Add-Member NoteProperty "Source URL"($web.Url) 
-    $Data | Add-Member NoteProperty "Source object level"("Site")
-    $Data | Add-Member NoteProperty "Destination URL"($web.Url.Replace($SrcSiteUrl,$DestSiteUrl))
-    $Data | Add-Member NoteProperty "Destination object level"("Site")
-    $Data | Add-Member NoteProperty "Method"("Merge")
-    $Data | Export-CSV $OutputFilePath -NoTypeInformation -Append -Encoding UTF8 -Force
 }
+
+
+
 # SIG # Begin signature block
 # MIIoGAYJKoZIhvcNAQcCoIIoCTCCKAUCAQExDzANBglghkgBZQMEAgEFADB5Bgor
 # BgEEAYI3AgEEoGswaTA0BgorBgEEAYI3AgEeMCYCAwEAAAQQH8w7YFlLCE63JNLG
-# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCD+46WIsl0p9tpr
-# i87nKY83Hm7N2zu774T0OXIR09/SmqCCDZowggawMIIEmKADAgECAhAIrUCyYNKc
+# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCDjfVN8G4g4HDrC
+# zT+TnheAj9m9ixYcaEsg0OPVifM2mKCCDZowggawMIIEmKADAgECAhAIrUCyYNKc
 # TJ9ezam9k67ZMA0GCSqGSIb3DQEBDAUAMGIxCzAJBgNVBAYTAlVTMRUwEwYDVQQK
 # EwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xITAfBgNV
 # BAMTGERpZ2lDZXJ0IFRydXN0ZWQgUm9vdCBHNDAeFw0yMTA0MjkwMDAwMDBaFw0z
@@ -139,19 +153,19 @@ foreach($web in $allWebs)
 # bmluZyBSU0E0MDk2IFNIQTM4NCAyMDIxIENBMQIQD3PbKnfwZFFLFp9BUDAdFDAN
 # BglghkgBZQMEAgEFAKB8MBAGCisGAQQBgjcCAQwxAjAAMBkGCSqGSIb3DQEJAzEM
 # BgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMC8GCSqG
-# SIb3DQEJBDEiBCCk9m09nrZNVdpFETXJ7rU12jjeFBLeyC2a1ZKSZqKdwjANBgkq
-# hkiG9w0BAQEFAASCAYC8Bvo1R+LDi1pwbWwW5kVEjAbApFV4XOC6aOmqYlPZltby
-# Al/eQVRhJ6tf/QRWcJhtGKlElSyRhNsXtltMRYgHCWge4q5wpkn2D8kMeM20Q8/Q
-# ieSc9zJp4ouelDpyb6pbejHymrCwyoJ66IVXT1CDXnxeVH+s3G8zGvSZcTv9Vzhy
-# DpVjgaCmq/22OpBfi58s5p7yVxCwTNM8nilEVwa1q0RrITkAmVViQ8bWBSLejSmC
-# Mp/eRcdBj0b9ohUa84Y61rfO+2MZ5IBEAZOgGrFUUU9oYvRiiLbNi6IFP1tzINzK
-# xS/Qo4RNIqVJZ3bO3MR2FVj5LAk7DgHGWgun+GadKXG8P+V9JwzKWIMEL9WiWEt9
-# 1+YIIHjB/VP10+Yo8pRvip9dMPYXlZV9vvOFQZYbphuEFJvaSscDak8dXJ2XQGG+
-# Jf7ecvR34TXo4yl6rolB4LNFlpT0I72jJkvgPhf0cmSareS49lSSXP2p2UQMm4OB
-# GwSK7dcognizKGbWbUmhghcqMIIXJgYKKwYBBAGCNwMDATGCFxYwghcSBgkqhkiG
+# SIb3DQEJBDEiBCBYrKLRKhcknZ8xY7sWxke7q5kz5Wt0hmbfN5ynLbwG1DANBgkq
+# hkiG9w0BAQEFAASCAYBt5eVg2h2ApyQK10+pjSXqcDSU4aKbQbBU6B5IVkT+GKWj
+# 866K//UfYRS/CZj0ZsVTZLxHczpIQ2yyeDB7VVlcovJ7y8mY1Prq1YBTeERWdsrB
+# zqfpx6v6OD3k5mpNqxnKucLQ6Bk88BhKy0MEzBYrmcXkulTk8kRyQ/PpKz0QEevh
+# zg1ioV1qRGMZ+DThcXxRxSbo7ks8Fsw+LraO7hWhuT33eE8TEkiQdpx9lXTHik+7
+# EpFKLRQdjuGHYmgAbLb/0rWJVZpDgtJHl5XOqNu1qSuGSDT3btp4Lk9G7C32tNl3
+# fZpmLiYE7ggQd0h2FI1C84Geu2CLd+IcY5Mr8XIcwSwkgETsZv+FBvlbRWoCe55D
+# PKXBj5sbTqGLFtVNhuHhL1SF5YPOhTF4G4bU3Oeo137yys3QEgVFEEDIv6Qwn9g0
+# lidNwadLI+E4aUFjZtTr/CYWV+LcXBUNjlwL9MpKL+XogVJt3KZHaKlAFzPxpDOc
+# SQc3JcbQs1aVDKJhwruhghcqMIIXJgYKKwYBBAGCNwMDATGCFxYwghcSBgkqhkiG
 # 9w0BBwKgghcDMIIW/wIBAzEPMA0GCWCGSAFlAwQCAQUAMGgGCyqGSIb3DQEJEAEE
-# oFkEVzBVAgEBBglghkgBhv1sBwEwITAJBgUrDgMCGgUABBQYwIWZLS54hcgGCfDR
-# RrMcYr68VgIRAOrRphPaK7+hIC+0j6g64TQYDzIwMjUwMjI0MDYxNDAyWqCCEwMw
+# oFkEVzBVAgEBBglghkgBhv1sBwEwITAJBgUrDgMCGgUABBSFpuPq8ZcRyXG3YPW0
+# pEtfwguONgIRAIFmt0wOjzt7riyobdl02c4YDzIwMjUwMjI0MDYyNDU2WqCCEwMw
 # gga8MIIEpKADAgECAhALrma8Wrp/lYfG+ekE4zMEMA0GCSqGSIb3DQEBCwUAMGMx
 # CzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE7MDkGA1UEAxMy
 # RGlnaUNlcnQgVHJ1c3RlZCBHNCBSU0E0MDk2IFNIQTI1NiBUaW1lU3RhbXBpbmcg
@@ -257,19 +271,19 @@ foreach($web in $allWebs)
 # MBUGA1UEChMORGlnaUNlcnQsIEluYy4xOzA5BgNVBAMTMkRpZ2lDZXJ0IFRydXN0
 # ZWQgRzQgUlNBNDA5NiBTSEEyNTYgVGltZVN0YW1waW5nIENBAhALrma8Wrp/lYfG
 # +ekE4zMEMA0GCWCGSAFlAwQCAQUAoIHRMBoGCSqGSIb3DQEJAzENBgsqhkiG9w0B
-# CRABBDAcBgkqhkiG9w0BCQUxDxcNMjUwMjI0MDYxNDAyWjArBgsqhkiG9w0BCRAC
+# CRABBDAcBgkqhkiG9w0BCQUxDxcNMjUwMjI0MDYyNDU2WjArBgsqhkiG9w0BCRAC
 # DDEcMBowGDAWBBTb04XuYtvSPnvk9nFIUIck1YZbRTAvBgkqhkiG9w0BCQQxIgQg
-# 6VmARdACwAYKTaMuNB95gj23c2esYB57DWh6GBlmRY0wNwYLKoZIhvcNAQkQAi8x
+# 5RuAiZChAtuAGq/8pFhzNofyDZTQJRrOh5E7gzi6yfUwNwYLKoZIhvcNAQkQAi8x
 # KDAmMCQwIgQgdnafqPJjLx9DCzojMK7WVnX+13PbBdZluQWTmEOPmtswDQYJKoZI
-# hvcNAQEBBQAEggIAmTVBZN/FcZ8DV/m1HLdHILJwLTURhmljmv4sBCq5hZOy4FM5
-# mJVlSdYuFl3InEyyh+JGn6WW+x1yqq7mfSYw814T4YS5AIeTp3lcRb/PK7TdqZrE
-# uAS9RlYeywSt/WBNOxQLRsNa02zDgQ9NMF2pzkHiYPWw1ket6/uUi8wpX+qHOMB7
-# jmuLqktpBZcQFXG1ZxH6gpoNYe6sy944L8YXGWhdameAcqPiHjPdkJUBWf1/MHx3
-# 4Uq5gTIvL8jFnuCfx32tBeTiMk+RwevJhnLJMzXwH9bTwnQQeVEnnfbdO8f8AXzk
-# wnBBRlURut0CAXRIHogSFoa6N+LJJFJRNDOtvAzLR93Ti/ZWjDTOdDO6G/0I6mWl
-# ho8iza36WEGxxzfj9KTsPmCoVKfHao9K3nU4jUtU/YbkCat7VkIqCl3xNGZidLGt
-# BvnAhWc+4UN/Y93PD2ZsyMFcgIlygU1Gt2M1GPJkORMbjq221yREZ/u639B5OGoL
-# WxLNhUyjOK/sGpPiSzvLMluYSsSxfgF5iY930EPRe6N37Cj6k7JK0ns6IJ7JYw+2
-# aDxP5117iJgxLcWCm2FXz2k6IkL1oX+4nhSRsWSJ0tJavQFm0zYXY6NaW7pbQMW0
-# 3w35JUSBdtNXr/S/axjE7ndQOdcWOgGQ8znm1ANcO65QU0pJqJUUE3bJJbI=
+# hvcNAQEBBQAEggIAfY9XQvIcKv2IE7H+UtAe/kxekptRbURPMNWHaNT3mpK+0sdf
+# 6CbcMoUfCwAPfLCmqMxcJ1ma93H15U6EaZYNKKsmqF94xb3rbUgSqOqwKrT2b0jU
+# uD4XXoMNUBqx69LToaUqNLvdfjS31Yp0XA4KWV/2KN7mPFSWdC6npi78fkSXqtb5
+# wPw3kCZ0ZI15KcfdrcSz5EYMuwVBN0jnU06ExdZBUDEIhyYaM1x6BqaH11Ll/bcy
+# R9rZTqbYa2EjzKdBs45dLzimDjFsvRH2bdel9Y3Lf1VwTm42uWMFQ7EAMyE3zEOL
+# 0yVW646Xhq8KSCdfyQdeyF+MBxFwXAsaReoX+4MSl0FFRN1LPEff3wsFRPCkC+ge
+# IUAPvkWIJxkLz7UbHKchxShqIMO9UQYyc+jIHkhZqQm+ZOYJJzIdGFY5K4WRp5Gx
+# NItZj2dWPjqvW1QWlQ+KN7xmKzUf/wx8ugyb7gKMlghwji2xuAiQjkUAR2uid+4n
+# GQCLf4e67yZgTnY1uR9civ3hPjiMUFD7oe0fHD60CMZL416A6voeONSABGKNpGZu
+# uYSP9LZx909fKh8RMja+aDvLiuFqeaMf9cUl09kKeTrZ+dq/Cck74IAk4ZrSHdMJ
+# PvxnynwY4WByPrnzP4wDFgIQkKXpcrZ0rrWKHTHfnA1LQTUblRPFh1snBQQ=
 # SIG # End signature block
