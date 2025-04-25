@@ -64,7 +64,8 @@ namespace AvePoint.Migration.Samples
                 throw new ArgumentNullException(nameof(planId));
             }
 
-            var response = await client.GetAsync($"/api/filesystem/plans/{planId}/jobs");
+            //var response = await client.GetAsync($"/api/filesystem/plans/{planId}/jobs);
+            var response = await client.GetAsync($"/api/filesystem/plans/findjobs?id={planId}");
 
             return await response.Content.ReadAsStringAsync();
         }
