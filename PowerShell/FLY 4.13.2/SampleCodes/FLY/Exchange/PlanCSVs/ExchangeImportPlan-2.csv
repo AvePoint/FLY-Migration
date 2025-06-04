@@ -1,0 +1,10 @@
+Source Email Address,Source Type,Destination Email Address,Destination Type,Migrate Archive Mailbox,Migrate Deletions Folder,Convert To Shared Mailbox
+user@contoso.onmicrosoft.com,UserMailbox,user@contoso.onmicrosoft.com,UserMailbox,FALSE,FALSE,FALSE
+user@contoso.onmicrosoft.com(In-Place Archive Mailbox),ArchiveMailbox,user@contoso.onmicrosoft.com(In-Place Archive Mailbox),ArchiveMailbox,FALSE,FALSE,FALSE
+shared@contoso.onmicrosoft.com,SharedMailbox,shared@contoso.onmicrosoft.com,SharedMailbox,FALSE,FALSE,FALSE
+shared@contoso.onmicrosoft.com,SharedMailbox,group@contoso.onmicrosoft.com,Microsoft365GroupMailbox,FALSE,FALSE,FALSE
+resource@contoso.onmicrosoft.com,ResourceMailbox,resource@contoso.onmicrosoft.com,ResourceMailbox,FALSE,FALSE,FALSE
+resource@contoso.onmicrosoft.com,ResourceMailbox,group@contoso.onmicrosoft.com,Microsoft365GroupMailbox,FALSE,FALSE,FALSE
+group@contoso.onmicrosoft.com,Microsoft365GroupMailbox,group@contoso.onmicrosoft.com,Microsoft365GroupMailbox,FALSE,FALSE,FALSE
+user@contoso.onmicrosoft.com\folder,UserMailbox,user@contoso.onmicrosoft.com,UserMailbox,FALSE,FALSE,FALSE
+user@contoso.onmicrosoft.com,SchedulingMailbox,user@contoso.onmicrosoft.com,SchedulingMailbox,FALSE,FALSE,FALSE

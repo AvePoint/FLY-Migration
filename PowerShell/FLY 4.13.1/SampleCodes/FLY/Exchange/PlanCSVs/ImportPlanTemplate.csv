@@ -1,0 +1,4 @@
+Source Connection,Source Type,Destination Connection,Destination Type,Mapping Csv
+Connection id or name1,Online,Connection id or name1,Online,ExchangeImportPlan-1.csv
+Connection id or name2,Online,Connection id or name2,Online,ExchangeImportPlan-2.csv
+Connection id or name3,OnPremises,Connection id or name3,OnPremises,ExchangeImportPlan-3.csv

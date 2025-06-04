@@ -1,0 +1,6 @@
+Migrate From,Object Level,Migrate To,Object Level,Method
+https://contoso/sites/sc,SiteCollection,https://contoso/sites/sc,SiteCollection,Combine
+https://contoso/sites/sc/sub,Site,https://contoso/sites/sc/sub,Site,Combine
+https://contoso/sites/sc/sub,Site,https://contoso/sites/sc/sub,Site,Attach
+https://contoso/sites/sc/sub/list,List,https://contoso/sites/sc/sub/list,List,Combine
+https://contoso/sites/sc/sub/list/folder,Folder,https://contoso/sites/sc/sub/list/folder,Folder,Combine

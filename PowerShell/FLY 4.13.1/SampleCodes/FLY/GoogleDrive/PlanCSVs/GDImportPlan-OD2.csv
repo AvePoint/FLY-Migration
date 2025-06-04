@@ -1,0 +1,4 @@
+Migrate From,Migrate To,Object Level,Method
+user@contoso.com\folder,user@contoso.onmicrosoft.com,Library,Attach
+Shared Drive\folder,user@contoso.onmicrosoft.com\folder,Folder,Combine
+Shared Drive\folder,user@contoso.onmicrosoft.com,Library,Attach

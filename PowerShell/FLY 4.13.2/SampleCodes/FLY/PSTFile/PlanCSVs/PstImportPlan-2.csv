@@ -1,0 +1,4 @@
+Pst File Path,Password,Destination,Destination Type
+example.pst,Password,user@contoso.onmicrosoft.com,UserMailbox
+folder\example.pst,Password,user@contoso.onmicrosoft.com,UserMailbox
+example.pst,Password,user@contoso.onmicrosoft.com\folder,UserMailbox

@@ -1,0 +1,5 @@
+Source Email Address,Destination Team Name,Destination Team Email Address,Source Channel,Destination Channel,Destination Channel Type
+Team1@contoso.onmicrosoft.com,name1,Team01@contoso.onmicrosoft.com,Channel01,Channel02,Public
+Team2@contoso.onmicrosoft.com,name2,Team02@contoso.onmicrosoft.com,Channel01,Channel02,Private
+Team3@contoso.onmicrosoft.com,name3,Team03@contoso.onmicrosoft.com,,,
+Team4@contoso.onmicrosoft.com,name4,Team04@contoso.onmicrosoft.com,Channel01,Channel03,Shared

@@ -1,0 +1,3 @@
+Source Connection,Destination Connection,Mapping Csv
+Connection id1 or name1,Connection id1 or name1,SlackDirectMessagesImportPlan-1.csv
+Connection id2 or name2,Connection id2 or name2,SlackDirectMessagesImportPlan-2.csv

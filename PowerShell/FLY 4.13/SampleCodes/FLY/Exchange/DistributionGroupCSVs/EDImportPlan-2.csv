@@ -1,0 +1,6 @@
+Source Email Address,Source Type,Destination Email Address,Destination Type
+Distribution@contoso.onmicrosoft.com,DistributionGroup,group@contoso.onmicrosoft.com,Microsoft365Group
+Distribution@contoso.onmicrosoft.com,DistributionGroup,Distribution@contoso.onmicrosoft.com,DistributionGroup
+Distribution@contoso.onmicrosoft.com,SecurityGroup,SecurityGroup@contoso.onmicrosoft.com,SecurityGroup
+SecurityGroup@contoso.onmicrosoft.com,SecurityGroup,Distribution@contoso.onmicrosoft.com,DistributionGroup
+DynamicDistributionGroup@contoso.onmicrosoft.com,DynamicDistributionGroup,DynamicDistributionGroup@contoso.onmicrosoft.com,DynamicDistributionGroup

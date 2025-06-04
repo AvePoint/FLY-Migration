@@ -1,0 +1,3 @@
+Migrate From,Migrate To
+user1@contoso.onmicrosoft.com,user2@contoso.onmicrosoft.com
+user1@contoso.onmicrosoft.com\folder,user2@contoso.onmicrosoft.com\folder

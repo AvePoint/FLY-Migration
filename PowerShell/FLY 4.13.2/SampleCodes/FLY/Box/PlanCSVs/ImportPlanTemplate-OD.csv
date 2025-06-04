@@ -1,0 +1,3 @@
+Source Connection,Destination Connection,Mapping Csv
+connection name1 or id1,connection name1,BoxImportPlan-OD1.csv
+connection name2 or id2,connection name2,BoxImportPlan-OD2.csv

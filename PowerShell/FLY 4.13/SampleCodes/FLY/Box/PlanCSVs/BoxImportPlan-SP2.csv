@@ -1,0 +1,3 @@
+Source Url,Dest Url,Dest Level,Mapping Method
+user@contoso.com,https://contoso/sites/sc/library,Library,Combine
+user@contoso.com\folder,https://contoso/sites/sc/sub/list/folder,Folder,Attach

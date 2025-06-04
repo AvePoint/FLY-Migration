@@ -1,0 +1,3 @@
+Source Account Name,Source Credential Account,Source Credential Password,Destination Connection,Mapping Csv
+source account name1,source credential account1,source credential password1,connection name1,FSImportPlan-1OD.csv
+source account name2,source credential account2,source credential password2,connection name2,FSImportPlan-2OD.csv

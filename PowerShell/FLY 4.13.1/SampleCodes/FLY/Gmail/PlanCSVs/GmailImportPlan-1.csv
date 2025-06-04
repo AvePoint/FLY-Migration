@@ -1,0 +1,7 @@
+Source,Source Type,Destination,Destination Type,Migrate Archive Folder
+user@contosogsuite.com,UserMailbox,user@contoso.onmicrosoft.com,UserMailbox,TRUE
+user@contosogsuite.com,UserMailbox,shared@contoso.onmicrosoft.com,SharedMailbox,TRUE
+user@contosogsuite.com,UserMailbox,resource@contoso.onmicrosoft.com,ResourceMailbox,TRUE
+user@contosogsuite.com,UserMailbox,user@contoso.onmicrosoft.com(In-Place Archive Mailbox),ArchiveMailbox,TRUE
+resource@contosogsuite.com,ResourceMailbox,user@contoso.onmicrosoft.com,UserMailbox,TRUE
+user@contosogsuite.com\folder,UserMailbox,user@contoso.onmicrosoft.com,UserMailbox,TRUE

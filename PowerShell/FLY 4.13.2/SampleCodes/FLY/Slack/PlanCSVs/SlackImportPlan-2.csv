@@ -1,0 +1,5 @@
+Source Slack Channel Name,Destination Team Name,Destination Team Email Address,Team Privacy,Destination Channel,Destination Channel Type
+Slack Channel 01,Team 01,Team01@contoso.onmicrosoft.com,Public,General,Public
+Slack Channel 02,Team 02,Team02@contoso.onmicrosoft.com,Public,General,Public
+Slack Channel 03,Team 03,Team03@contoso.onmicrosoft.com,Public,Channel 03,Private
+Slack Channel 04,Team 04,Team04@contoso.onmicrosoft.com,Public,Channel 04,Shared

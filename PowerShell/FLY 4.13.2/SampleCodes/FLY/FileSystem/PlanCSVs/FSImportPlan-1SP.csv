@@ -1,0 +1,7 @@
+Migrate From,Object Level,Migrate To,Object Level,Method
+\\admin-PC\c$\data,Folder,https://contoso/sites/sc/library,Library,Combine
+\\admin-PC\c$\data,Folder,https://contoso/sites/sc/sub/list/folder,Folder,Attach
+\\admin-PC\shared folder,Folder,https://contoso/sites/sc/sub/list/folder,Folder,Combine
+\\admin-PC\shared folder,Folder,https://contoso-my.sharepoint.com/personal/user_contoso_onmicrosoft_com/Documents,Library,Attach
+\\admin-PC\c$\data\file1.txt,File,https://contoso/sites/sc/sub/list/folder,Folder,Combine
+\\admin-PC\shared folder\file2.doc,File,https://contoso-my.sharepoint.com/personal/user_contoso_onmicrosoft_com/Documents,Library,Combine

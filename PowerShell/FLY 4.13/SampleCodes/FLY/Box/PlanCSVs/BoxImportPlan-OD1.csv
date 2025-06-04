@@ -1,0 +1,4 @@
+Source Url,Dest Url,Dest Level,Mapping Method
+user@contoso.com,user@contoso.onmicrosoft.com,Library,Attach
+user@contoso.com\folder,user@contoso.onmicrosoft.com\folder,Folder,Combine
+user@contoso.com\folder,user@contoso.onmicrosoft.com,Library,Attach

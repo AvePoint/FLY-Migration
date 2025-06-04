@@ -1,0 +1,3 @@
+Source Connection,Source Type,Destination Connection,Destination Type,Mapping Csv
+source connection name1 or id1,Online,destination  connection id1 or name1,OnPremises,EDImportPlan-1.csv
+source connection name2 or id2,Online,destination  connection id2 or name2,OnPremises,EDImportPlan-2.csv

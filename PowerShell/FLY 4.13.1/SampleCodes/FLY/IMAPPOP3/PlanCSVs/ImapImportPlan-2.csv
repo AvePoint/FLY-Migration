@@ -1,0 +1,5 @@
+Source Email Address,Password,Destination Email Address,Destination Type
+user@contoso.onmicrosoft.com,password,user@contoso.onmicrosoft.com,UserMailbox
+shared@contoso.onmicrosoft.com,password,shared@contoso.onmicrosoft.com,SharedMailbox
+resource@contoso.onmicrosoft.com,password,resource@contoso.onmicrosoft.com,ResourceMailbox
+user@contoso.onmicrosoft.com,password,user@contoso.onmicrosoft.com(In-Place Archive Mailbox),ArchiveMailbox

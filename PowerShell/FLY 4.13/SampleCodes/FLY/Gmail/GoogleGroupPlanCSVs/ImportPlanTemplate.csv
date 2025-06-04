@@ -1,0 +1,3 @@
+Source Connection,Destination Connection,Destination Type,Mapping Csv
+source connection id1 or name1,destination connection id1 or name1,Online,GGroupImportPlan-1.csv
+source connection id2 or name2,destination connection id2 or name2,OnPremises,GGroupImportPlan-2.csv

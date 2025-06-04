@@ -1,0 +1,4 @@
+Source Email Address,Destination Email Address,Destination Type
+GoogleGroup@gmail.com,Distribution@contoso.onmicrosoft.com,DistributionGroup
+GoogleGroup@gmail.com,Group@contoso.onmicrosoft.com,Microsoft365Group
+GoogleGroup@gmail.com,SecurityGroup@contoso.onmicrosoft.com,SecurityGroup

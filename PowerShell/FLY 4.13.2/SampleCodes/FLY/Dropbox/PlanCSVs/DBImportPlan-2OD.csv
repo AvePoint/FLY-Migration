@@ -1,0 +1,3 @@
+Migrate From,Migrate To,Object Level,Method
+user@contoso.com,user@contoso.onmicrosoft.com\folder,Folder,Combine
+user@contoso.com\folder,user@contoso.onmicrosoft.com,Library,Attach

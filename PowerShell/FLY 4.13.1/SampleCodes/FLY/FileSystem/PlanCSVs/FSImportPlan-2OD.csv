@@ -1,0 +1,7 @@
+Migrate From,Object Level,Migrate To,Object Level,Method
+\\admin-PC\c$\data,Folder,user@contoso.onmicrosoft.com,Library,Combine
+\\admin-PC\c$\data,Folder,user@contoso.onmicrosoft.com\folder,Folder,Attach
+\\admin-PC\shared folder,Folder,user@contoso.onmicrosoft.com\folder,Folder,Combine
+\\admin-PC\shared folder,Folder,user@contoso.onmicrosoft.com,Library,Attach
+\\admin-PC\c$\data\file1.txt,File,user@contoso.onmicrosoft.com\folder,Folder,Combine
+\\admin-PC\shared folder\file2.doc,File,user@contoso.onmicrosoft.com,Library,Combine

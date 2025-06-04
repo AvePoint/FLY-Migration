@@ -1,0 +1,3 @@
+Source,Destination
+publicfoldersource,publicfolderdestination
+publicfoldersource\subfolder,shared@contoso.onmicrosoft.com\Folder Name
